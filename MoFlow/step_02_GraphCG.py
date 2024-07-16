@@ -244,12 +244,7 @@ def step_02_Variance_SSL_saving():
     assert len(var_array) == z_space_dim
     var_index = np.argsort(var_array)
     
-    if high:
-        # select index with the highest variance
-        sampled_direction_idx = var_index[-args.num_directions:]
-    else:
-        # select index with the lowest variance
-        sampled_direction_idx = var_index[:args.num_directions]
+    sampled_direction_idx = var_index[-args.num_directions:]
     print("sampled_direction_idx: ", sampled_direction_idx)
 
     #################### sample direction ####################
