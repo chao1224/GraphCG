@@ -1,11 +1,13 @@
+import random
+from itertools import combinations
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
-import numpy as np
-import random
-from itertools import combinations
-from torch.utils.data import Dataset, DataLoader
+
 from .core_editing_function import do_ssl_on_codes, do_ssl_on_directions
 
 

@@ -1,14 +1,16 @@
 import argparse
 import os
-import sys
 import random
+import sys
 import time
-from sklearn.decomposition import PCA
 from distutils.util import strtobool
+
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
 from rdkit import RDLogger
+from sklearn.decomposition import PCA
+from tqdm import tqdm
+
 lg = RDLogger.logger()
 lg.setLevel(RDLogger.CRITICAL)
 
@@ -16,20 +18,23 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
+                     Direction_Embedding_03, Direction_Embedding_04,
+                     contrastive_SSL_01, contrastive_SSL_01_with_batch,
+                     contrastive_SSL_02, contrastive_SSL_03,
+                     contrastive_SSL_04, step_03_evaluate_manipuated_data)
 
-from data import transform_qm9, transform_zinc250k, transform_chembl
+from data import transform_chembl, transform_qm9, transform_zinc250k
 from data.data_loader import NumpyTupleDataset
-from data.transform_zinc250k import (transform_fn_zinc250k, zinc250_atomic_num_list)
-from data.transform_chembl import (chembl_atomic_num_list)
-
+from data.transform_chembl import chembl_atomic_num_list
+from data.transform_zinc250k import (transform_fn_zinc250k,
+                                     zinc250_atomic_num_list)
 from mflow.models.hyperparams import Hyperparameters
 from mflow.models.model import MoFlow, rescale_adj
-from mflow.models.utils import (_to_numpy_array, adj_to_smiles, check_novelty, check_validity, construct_mol, correct_mol, valid_mol, valid_mol_can_with_seg)
+from mflow.models.utils import (_to_numpy_array, adj_to_smiles, check_novelty,
+                                check_validity, construct_mol, correct_mol,
+                                valid_mol, valid_mol_can_with_seg)
 from mflow.utils.model_utils import get_latent_vec, load_model
-
-from GraphCG import Direction_Embedding_01, Direction_Embedding_02, Direction_Embedding_03, Direction_Embedding_04
-from GraphCG import contrastive_SSL_01, contrastive_SSL_02, contrastive_SSL_03, contrastive_SSL_04, contrastive_SSL_01_with_batch
-from GraphCG import step_03_evaluate_manipuated_data
 
 
 def generate_molecules_from_reconstruction(model, train_dataset, batch_size, num_sample):

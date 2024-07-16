@@ -1,7 +1,6 @@
 import argparse
 import os
 import sys
-
 from distutils.util import strtobool
 
 import numpy as np
@@ -11,10 +10,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from descriptastorus.descriptors import rdDescriptors
 from PIL import Image
 from rdkit import Chem, DataStructs, RDLogger
 from rdkit.Chem import AllChem, Descriptors, Draw
-from descriptastorus.descriptors import rdDescriptors
 
 lg = RDLogger.logger()
 lg.setLevel(RDLogger.CRITICAL)
@@ -22,15 +21,17 @@ lg.setLevel(RDLogger.CRITICAL)
 import functools
 import time
 
+from GraphCG.disentanglement_utils import (do_Beta_VAE, do_DCI, do_Factor_VAE,
+                                           do_MIG, do_Modularity, do_SAP)
 from rdkit.Chem import Descriptors
 from tqdm import tqdm
 
-from data import transform_qm9, transform_zinc250k, transform_chembl
-from data.data_loader import NumpyTupleDataset
-from data.transform_zinc250k import (transform_fn_zinc250k, zinc250_atomic_num_list)
-from data.transform_chembl import (chembl_atomic_num_list)
-
 import mflow
+from data import transform_chembl, transform_qm9, transform_zinc250k
+from data.data_loader import NumpyTupleDataset
+from data.transform_chembl import chembl_atomic_num_list
+from data.transform_zinc250k import (transform_fn_zinc250k,
+                                     zinc250_atomic_num_list)
 from mflow.models.hyperparams import Hyperparameters
 from mflow.models.model import MoFlow, rescale_adj
 from mflow.models.utils import (_to_numpy_array, adj_to_smiles, check_novelty,
@@ -38,8 +39,6 @@ from mflow.models.utils import (_to_numpy_array, adj_to_smiles, check_novelty,
                                 valid_mol, valid_mol_can_with_seg)
 from mflow.utils.model_utils import get_latent_vec, load_model
 from mflow.utils.timereport import TimeReport
-
-from GraphCG.disentanglement_utils import (do_Beta_VAE, do_Factor_VAE, do_MIG, do_DCI, do_Modularity, do_SAP)
 
 RDKIT_fragments = [
     'fr_Al_COO', 'fr_Al_OH', 'fr_Al_OH_noTert', 'fr_ArN',

@@ -1,5 +1,5 @@
-from sklearn import linear_model
 import numpy as np
+from sklearn import linear_model
 
 
 def do_Beta_VAE_single_factor(generated_latent, label, n_train, random_state, batch_size, verbose=False):

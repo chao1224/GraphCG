@@ -1,6 +1,7 @@
-import os
 import copy
+import os
 from collections import defaultdict
+
 import numpy as np
 import pandas as pd
 from rdkit import Chem, RDLogger

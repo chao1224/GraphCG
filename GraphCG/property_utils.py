@@ -1,9 +1,9 @@
-import numpy as np
-from tdc import Oracle
-from rdkit.Chem import AllChem, Descriptors
-from rdkit import DataStructs
 import pickle
 
+import numpy as np
+from rdkit import DataStructs
+from rdkit.Chem import AllChem, Descriptors
+from tdc import Oracle
 
 SA_scorer = Oracle(name = 'SA')
 DRD2_scorer_oracle = Oracle(name = 'DRD2')

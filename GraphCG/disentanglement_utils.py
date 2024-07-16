@@ -1,10 +1,11 @@
 import os
-import numpy as np 
+
+import numpy as np
 
 from .metrics_beta_vae import do_Beta_VAE, do_Beta_VAE_single_factor
+from .metrics_dci import do_DCI
 from .metrics_factor_vae import do_Factor_VAE
 from .metrics_mig import do_MIG
-from .metrics_dci import do_DCI
 from .metrics_modularity import do_Modularity
 from .metrics_sap import do_SAP
 
