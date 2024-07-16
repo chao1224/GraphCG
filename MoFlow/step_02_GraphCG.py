@@ -562,7 +562,8 @@ if __name__ == "__main__":
         step_02_SSL_training_and_saving()
 
     ########## step 03 ##########
-    props_list = ["tanimoto", "MolLogP", "TPSA", "HeavyAtomCount", "MolWt", "qed"]
+    # props_list = ["tanimoto", "MolLogP", "TPSA", "MolWt", "qed", "sa", "drd2", "jnk3", "gsk3b"]
+    props_list = ["tanimoto"]
     molecule_count_threshold_list = [2, 3, 4, 5]
     non_monotonic_ratio_threshold_list = [0, 0.2]
     step_03_evaluate_manipuated_data(manipulation_folder, props_list, molecule_count_threshold_list, non_monotonic_ratio_threshold_list, args)
