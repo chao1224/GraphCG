@@ -37,17 +37,6 @@ python step_02_GraphCG.py \
 --verbose=1
 
 
-######### baseline variance low ##########
-python step_02_GraphCG.py \
---model "$model" \
---train hgraph2graph/data/"$data_name"/all.txt \
---vocab hgraph2graph/data/"$data_name"/vocab.txt \
---epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
---num_direction "$num_direction" \
---contrastive_SSL=contrastive_SSL_variance_low \
---verbose=1
-
-
 ######### baseline PCA ##########
 python step_02_GraphCG.py \
 --model "$model" \
@@ -59,31 +48,15 @@ python step_02_GraphCG.py \
 --verbose=1
 
 
-######### baseline umap ##########
+######### GraphCG ##########
 python step_02_GraphCG.py \
 --model "$model" \
 --train hgraph2graph/data/"$data_name"/all.txt \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---contrastive_SSL=contrastive_SSL_UMAP \
+--embedding_function=Direction_Embedding_02 \
 --verbose=1
-
-
-# ######### baseline DisCo ##########
-# python step_02_GraphCG.py \
-# --model "$model" \
-# --train hgraph2graph/data/"$data_name"/all.txt \
-# --vocab hgraph2graph/data/"$data_name"/vocab.txt \
-# --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
-# --num_direction "$num_direction" \
-# --contrastive_SSL=contrastive_SSL_DisCo --embedding_function=MoFlowDisCo \
-# --alpha_step_option=first_last \
-# --alpha_01=1 --alpha_02=0 --alpha_03=0 \
-# --verbose=1
-
-
-
 
 
 
@@ -97,14 +70,14 @@ num_direction=10
 data_name=chembl
 model=hgraph2graph/ckpt/chembl-pretrained/model.ckpt
 ######### chembl ##########
-######### baseline one-hot ##########
+######### baseline random ##########
 python step_02_GraphCG.py \
 --model "$model" \
 --train hgraph2graph/data/"$data_name"/all.txt \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---embedding_function="$embedding_function" --contrastive_SSL=contrastive_SSL_onehot \
+--contrastive_SSL=contrastive_SSL_random \
 --verbose=1
 
 
@@ -119,36 +92,12 @@ python step_02_GraphCG.py \
 --verbose=1
 
 
-######### baseline variance low ##########
+######### GraphCG ##########
 python step_02_GraphCG.py \
 --model "$model" \
 --train hgraph2graph/data/"$data_name"/all.txt \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---embedding_function="$embedding_function" --contrastive_SSL=contrastive_SSL_variance_low \
+--embedding_function=Direction_Embedding_02 \
 --verbose=1
-
-
-######### baseline umap ##########
-python step_02_GraphCG.py \
---model "$model" \
---train hgraph2graph/data/"$data_name"/all.txt \
---vocab hgraph2graph/data/"$data_name"/vocab.txt \
---epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample 100 \
---num_direction 3 \
---embedding_function="$embedding_function" --contrastive_SSL=contrastive_SSL_UMAP \
---verbose=1
-
-
-# ######### baseline DisCo ##########
-# python step_02_GraphCG.py \
-# --model "$model" \
-# --train hgraph2graph/data/"$data_name"/all.txt \
-# --vocab hgraph2graph/data/"$data_name"/vocab.txt \
-# --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
-# --num_direction "$num_direction" \
-# --contrastive_SSL=contrastive_SSL_DisCo --embedding_function=MoFlowDisCo \
-# --alpha_step_option=first_last \
-# --alpha_01=1 --alpha_02=0 --alpha_03=0 \
-# --verbose=1

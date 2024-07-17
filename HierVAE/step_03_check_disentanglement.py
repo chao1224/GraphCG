@@ -1,23 +1,20 @@
+import argparse
 import os
+import random
+import sys
 
+import numpy as np
+import rdkit
 import torch
+from descriptastorus.descriptors import rdDescriptors
+from rdkit import Chem
 from torch.utils.data import DataLoader, Dataset
 
-import random, sys
-import numpy as np
-import argparse
-
-import rdkit
-from rdkit import Chem
-from descriptastorus.descriptors import rdDescriptors
-
-import sys
 sys.path.insert(0, 'hgraph2graph')
-from GraphCG.disentanglement_utils import (do_Beta_VAE, do_Factor_VAE, do_MIG, do_DCI, do_Modularity, do_SAP)
-
+from GraphCG.disentanglement_utils import (do_Beta_VAE, do_DCI, do_Factor_VAE,
+                                           do_MIG, do_Modularity, do_SAP)
 from hgraph import *
 from hgraph import MolGraph
-
 
 RDKIT_fragments = [
     'fr_Al_COO', 'fr_Al_OH', 'fr_Al_OH_noTert', 'fr_ArN',

@@ -1,32 +1,30 @@
+import argparse
 import os
+import random
+import sys
+import time
 
+import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.functional as F
-from torch.utils.data import DataLoader, Dataset
-from sklearn.decomposition import PCA
-
-import random, sys
-import numpy as np
-import argparse
-from tqdm import tqdm
-import time
-import pandas as pd
-
+import torch.optim as optim
 from rdkit import Chem
+from sklearn.decomposition import PCA
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
 
-import sys
 sys.path.insert(0, 'hgraph2graph')
 
-from hgraph import *
 import rdkit
-from hgraph import MolGraph
-
-from GraphCG import Direction_Embedding_01, Direction_Embedding_02, Direction_Embedding_03, Direction_Embedding_04
-from GraphCG import contrastive_SSL_01, contrastive_SSL_02, contrastive_SSL_03, contrastive_SSL_04
-
+from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
+                     Direction_Embedding_03, Direction_Embedding_04,
+                     contrastive_SSL_01, contrastive_SSL_02,
+                     contrastive_SSL_03, contrastive_SSL_04)
 from GraphCG.molecule_utils import step_03_evaluate_manipuated_data
+from hgraph import *
+from hgraph import MolGraph
 
 
 class MoleculeDataset(Dataset):
