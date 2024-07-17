@@ -2,7 +2,8 @@ import torch
 from torch.utils.data import Dataset
 from rdkit import Chem
 import os, random, gc
-import pickle
+# import pickle
+import pickle5 as pickle
 
 from hgraph.chemutils import get_leaves
 from hgraph.mol_graph import MolGraph

@@ -37,17 +37,23 @@ class HierVAE(nn.Module):
         z_vecs = z_mean + torch.exp(z_log_var / 2) * epsilon if perturb else z_mean
         return z_vecs, kl_loss
 
-    def sample(self, batch_size, greedy):
-        root_vecs = torch.randn(batch_size, self.latent_size).cuda()
-        return self.decoder.decode((root_vecs, root_vecs, root_vecs), greedy=greedy, max_decode_step=150)
+    def sample(self, batch_size, greedy, direction=None):
+        if direction is not None:
+            return self.decoder.decode((direction, direction, direction), greedy=greedy, max_decode_step=150)
+        else:
+            root_vecs = torch.randn(batch_size, self.latent_size).cuda()
+            return self.decoder.decode((root_vecs, root_vecs, root_vecs), greedy=greedy, max_decode_step=150), root_vecs
 
-    def reconstruct(self, batch):
+    def reconstruct(self, batch, perturb=False, return_latent=False):
         graphs, tensors, _ = batch
         tree_tensors, graph_tensors = tensors = make_cuda(tensors)
         root_vecs, tree_vecs, _, graph_vecs = self.encoder(tree_tensors, graph_tensors)
 
-        root_vecs, root_kl = self.rsample(root_vecs, self.R_mean, self.R_var, perturb=False)
-        return self.decoder.decode((root_vecs, root_vecs, root_vecs), greedy=True, max_decode_step=150)
+        root_vecs, root_kl = self.rsample(root_vecs, self.R_mean, self.R_var, perturb=perturb)
+        if not return_latent:
+            return self.decoder.decode((root_vecs, root_vecs, root_vecs), greedy=True, max_decode_step=150)
+        else:
+            return self.decoder.decode((root_vecs, root_vecs, root_vecs), greedy=True, max_decode_step=150), root_vecs
        
     def forward(self, graphs, tensors, orders, beta, perturb_z=True):
         tree_tensors, graph_tensors = tensors = make_cuda(tensors)
@@ -190,4 +196,3 @@ class HierCondVGNN(HierVGNN):
 
         loss, wacc, iacc, tacc, sacc = self.decoder((x_root_vecs, x_tree_vecs, x_graph_vecs), y_graphs, y_tensors, y_orders)
         return loss + beta * kl_div, kl_div.item(), wacc, iacc, tacc, sacc
-
