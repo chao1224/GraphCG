@@ -1,6 +1,6 @@
 time=2
 embedding_function_list=(Direction_Embedding_01 Direction_Embedding_02 Direction_Embedding_03)
-contrastive_SSL_list=(contrastive_SSL_04)
+GraphCG_editing_list=(GraphCG_editing_04)
 num_direction_list=(10 32)
 
 alpha_step_option_list=(random first_last)
@@ -12,7 +12,7 @@ alpha_03_list=(0)
 
 
 for embedding_function in "${embedding_function_list[@]}"; do
-for contrastive_SSL in "${contrastive_SSL_list[@]}"; do
+for GraphCG_editing in "${GraphCG_editing_list[@]}"; do
 for num_direction in "${num_direction_list[@]}"; do
 
 for alpha_01 in "${alpha_01_list[@]}"; do
@@ -33,7 +33,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
     data_name=qm9
     model=results/qm9/model.ckpt
 
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -46,7 +46,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
         --vocab hgraph2graph/data/"$data_name"/vocab.txt \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option="$alpha_step_option" --alpha_step_option_random_num="$alpha_step_option_random_num" \
         --alpha_01="$alpha_01" --alpha_02="$alpha_02" --alpha_03="$alpha_03" \
         --output_folder="$output_folder"
@@ -61,7 +61,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
     data_name=chembl
     model=hgraph2graph/ckpt/chembl-pretrained/model.ckpt
     
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -74,7 +74,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
         --vocab hgraph2graph/data/"$data_name"/vocab.txt \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option="$alpha_step_option" --alpha_step_option_random_num="$alpha_step_option_random_num" \
         --alpha_01="$alpha_01" --alpha_02="$alpha_02" --alpha_03="$alpha_03" \
         --output_folder="$output_folder"

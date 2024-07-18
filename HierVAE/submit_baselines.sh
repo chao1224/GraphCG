@@ -1,15 +1,15 @@
 time=5
 
-contrastive_SSL_list=(
-    contrastive_SSL_random
-    contrastive_SSL_variance_high
+GraphCG_editing_list=(
+    GraphCG_editing_random
+    GraphCG_editing_variance_high
 )
 embedding_function="none"
 num_direction_list=(10)
 num_sample_list=(100 500)
 
 
-for contrastive_SSL in "${contrastive_SSL_list[@]}"; do
+for GraphCG_editing in "${GraphCG_editing_list[@]}"; do
 for num_direction in "${num_direction_list[@]}"; do
 for num_sample in "${num_sample_list[@]}"; do
  
@@ -18,7 +18,7 @@ for num_sample in "${num_sample_list[@]}"; do
     data_name=qm9
     model=results/qm9/model.ckpt
 
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"/"$num_direction"_"$num_sample"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"/"$num_direction"_"$num_sample"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -31,7 +31,7 @@ for num_sample in "${num_sample_list[@]}"; do
         --vocab hgraph2graph/data/"$data_name"/vocab.txt \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option=first_last \
         --alpha_01=1 --alpha_02=0 --alpha_03=0 \
         --output_folder="$output_folder"
@@ -43,7 +43,7 @@ for num_sample in "${num_sample_list[@]}"; do
     data_name=chembl
     model=hgraph2graph/ckpt/chembl-pretrained/model.ckpt
     
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"/"$num_direction"_"$num_sample"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"/"$num_direction"_"$num_sample"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -56,7 +56,7 @@ for num_sample in "${num_sample_list[@]}"; do
         --vocab hgraph2graph/data/"$data_name"/vocab.txt \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option=first_last \
         --alpha_01=1 --alpha_02=0 --alpha_03=0 \
         --output_folder="$output_folder"

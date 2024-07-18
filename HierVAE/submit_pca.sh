@@ -1,6 +1,6 @@
 
 time=2
-contrastive_SSL_list=(contrastive_SSL_PCA)
+GraphCG_editing_list=(GraphCG_editing_PCA)
 embedding_function_list=(PCA_Embedding)
 num_direction_list=(10)
 
@@ -8,13 +8,13 @@ num_direction_list=(10)
 
 
 time=2
-contrastive_SSL_list=(contrastive_SSL_PCA)
+GraphCG_editing_list=(GraphCG_editing_PCA)
 embedding_function_list=(PCA_Embedding)
 num_direction_list=(2 3)
 
 
 for embedding_function in "${embedding_function_list[@]}"; do
-for contrastive_SSL in "${contrastive_SSL_list[@]}"; do
+for GraphCG_editing in "${GraphCG_editing_list[@]}"; do
 for num_direction in "${num_direction_list[@]}"; do
     
     epochs=100
@@ -23,7 +23,7 @@ for num_direction in "${num_direction_list[@]}"; do
     data_name=qm9
     model=results/qm9/model.ckpt
 
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -36,7 +36,7 @@ for num_direction in "${num_direction_list[@]}"; do
         --vocab hgraph2graph/data/"$data_name"/vocab.txt \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --output_folder="$output_folder"
     fi
 
@@ -50,7 +50,7 @@ for num_direction in "${num_direction_list[@]}"; do
     data_name=chembl
     model=hgraph2graph/ckpt/chembl-pretrained/model.ckpt
     
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -63,7 +63,7 @@ for num_direction in "${num_direction_list[@]}"; do
         --vocab hgraph2graph/data/"$data_name"/vocab.txt \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --output_folder="$output_folder"
     fi
 

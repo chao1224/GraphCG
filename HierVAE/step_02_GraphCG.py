@@ -20,8 +20,8 @@ sys.path.insert(0, 'hgraph2graph')
 import rdkit
 from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
                      Direction_Embedding_03, Direction_Embedding_04,
-                     contrastive_SSL_01, contrastive_SSL_02,
-                     contrastive_SSL_03, contrastive_SSL_04)
+                     GraphCG_editing_01, GraphCG_editing_02,
+                     GraphCG_editing_03, GraphCG_editing_04)
 from GraphCG.molecule_utils import step_03_evaluate_manipuated_data
 from hgraph import *
 from hgraph import MolGraph
@@ -293,14 +293,14 @@ def step_02_SSL_training_and_saving():
     ]
     optimizer = optim.Adam(model_param_group, lr=args.lr, weight_decay=args.decay)
 
-    if args.contrastive_SSL == "contrastive_SSL_01":
-        embedding_function = contrastive_SSL_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
-    elif args.contrastive_SSL == "contrastive_SSL_02":
-        embedding_function = contrastive_SSL_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
-    elif args.contrastive_SSL == "contrastive_SSL_03":
-        embedding_function = contrastive_SSL_03(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
-    elif args.contrastive_SSL == "contrastive_SSL_04":
-        embedding_function = contrastive_SSL_04(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
+    if args.GraphCG_editing == "GraphCG_editing_01":
+        embedding_function = GraphCG_editing_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
+    elif args.GraphCG_editing == "GraphCG_editing_02":
+        embedding_function = GraphCG_editing_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
+    elif args.GraphCG_editing == "GraphCG_editing_03":
+        embedding_function = GraphCG_editing_03(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
+    elif args.GraphCG_editing == "GraphCG_editing_04":
+        embedding_function = GraphCG_editing_04(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     else:
         raise ValueError(
             "Contrastive SSL function {} not included.".format(args.embedding_function)
@@ -364,7 +364,7 @@ if __name__ == '__main__':
     parser.add_argument("--decay", type=float, default=0)
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--embedding_function", type=str, default="Direction_Embedding_01")
-    parser.add_argument("--contrastive_SSL", type=str, default="contrastive_SSL_01")
+    parser.add_argument("--GraphCG_editing", type=str, default="GraphCG_editing_01")
     parser.add_argument("--num_directions", type=int, default=100)
     parser.add_argument("--alpha", type=float, default=3.0)
     parser.add_argument("--alpha_split_num", type=int, default=21)
@@ -420,11 +420,11 @@ if __name__ == '__main__':
     step_01_generate_samples()
 
     ########## step 02 ##########
-    if args.contrastive_SSL == "contrastive_SSL_random":
+    if args.GraphCG_editing == "GraphCG_editing_random":
         step_02_Random_SSL_saving()
-    elif args.contrastive_SSL == "contrastive_SSL_variance_high":
+    elif args.GraphCG_editing == "GraphCG_editing_variance_high":
         step_02_Variance_SSL_saving()
-    elif args.contrastive_SSL == "contrastive_SSL_PCA":
+    elif args.GraphCG_editing == "GraphCG_editing_PCA":
         step_02_PCA_SSL_saving()
     else:
         step_02_SSL_training_and_saving()

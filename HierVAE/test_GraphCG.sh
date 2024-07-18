@@ -22,7 +22,7 @@ python step_02_GraphCG.py \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---contrastive_SSL=contrastive_SSL_random \
+--GraphCG_editing=GraphCG_editing_random \
 --verbose=1
 
 
@@ -33,7 +33,7 @@ python step_02_GraphCG.py \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---contrastive_SSL=contrastive_SSL_variance_high \
+--GraphCG_editing=GraphCG_editing_variance_high \
 --verbose=1
 
 
@@ -44,7 +44,7 @@ python step_02_GraphCG.py \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---contrastive_SSL=contrastive_SSL_PCA \
+--GraphCG_editing=GraphCG_editing_PCA \
 --verbose=1
 
 
@@ -77,7 +77,7 @@ python step_02_GraphCG.py \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---contrastive_SSL=contrastive_SSL_random \
+--GraphCG_editing=GraphCG_editing_random \
 --verbose=1
 
 
@@ -88,7 +88,7 @@ python step_02_GraphCG.py \
 --vocab hgraph2graph/data/"$data_name"/vocab.txt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---embedding_function="$embedding_function" --contrastive_SSL=contrastive_SSL_variance_high \
+--embedding_function="$embedding_function" --GraphCG_editing=GraphCG_editing_variance_high \
 --verbose=1
 
 
