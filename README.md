@@ -87,6 +87,7 @@ pip install pandas
 pip install torchdiffeq==0.0.1
 pip install cython
 conda install -c sirokujira python-pcl --channel conda-forge
+pip install gdown
 
 pip install -e .
 ```
@@ -94,7 +95,16 @@ pip install -e .
 ## 2.2 PointFlow
 
 1. Go to directory, `cd PointFlow`.
-2. Download datasets
+2. Download datasets,
+```
+python step_01_download.py
+unzip ShapeNetCore.v2.PC15k.zip
+```
+3. Set up data path,
+```
+data_dir=ShapeNetCore.v2.PC15k
+```
+4. Then run the jobs `bash run_GraphCG.sh`.
 
 
 
