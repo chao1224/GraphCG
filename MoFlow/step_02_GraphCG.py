@@ -22,7 +22,8 @@ from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
                      Direction_Embedding_03, Direction_Embedding_04,
                      contrastive_SSL_01, contrastive_SSL_01_with_batch,
                      contrastive_SSL_02, contrastive_SSL_03,
-                     contrastive_SSL_04, step_03_evaluate_manipuated_data)
+                     contrastive_SSL_04)
+from GraphCG.molecule_utils import step_03_evaluate_manipuated_data
 
 from data import transform_chembl, transform_qm9, transform_zinc250k
 from data.data_loader import NumpyTupleDataset
