@@ -6,7 +6,7 @@ zinc250k_folder=./results_reported/zinc250k_512t2cnn_256gnn_512-64lin_10flow_19f
 
 time=2
 embedding_function_list=(Direction_Embedding_01 Direction_Embedding_02 Direction_Embedding_03)
-contrastive_SSL_list=(contrastive_SSL_03)
+GraphCG_editing_list=(GraphCG_editing_03)
 SSL_noise_level_list=(0.1 1 2)
 num_direction_list=(10 32)
 
@@ -20,7 +20,7 @@ num_sample_list=(100)
 
 
 for embedding_function in "${embedding_function_list[@]}"; do
-for contrastive_SSL in "${contrastive_SSL_list[@]}"; do
+for GraphCG_editing in "${GraphCG_editing_list[@]}"; do
 for SSL_noise_level in "${SSL_noise_level_list[@]}"; do
 for num_direction in "${num_direction_list[@]}"; do
 
@@ -42,7 +42,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
     data_name=qm9
     model_folder="$qm9_folder"
 
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"_"$SSL_noise_level"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"_"$SSL_noise_level"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -57,7 +57,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
         --data_name "$data_name"  \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option="$alpha_step_option" --alpha_step_option_random_num="$alpha_step_option_random_num" \
         --SSL_noise_level="$SSL_noise_level" \
         --alpha_01="$alpha_01" --alpha_02="$alpha_02" --alpha_03="$alpha_03" \
@@ -72,7 +72,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
     data_name=zinc250k
     model_folder="$zinc250k_folder"
     
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"_"$SSL_noise_level"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$alpha_step_option"_"$alpha_step_option_random_num"_"$alpha_01"_"$alpha_02"_"$alpha_03"_"$SSL_noise_level"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -87,7 +87,7 @@ for alpha_step_option_random_num in "${alpha_step_option_random_num_list[@]}"; d
         --data_name "$data_name"  \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option="$alpha_step_option" --alpha_step_option_random_num="$alpha_step_option_random_num" \
         --SSL_noise_level="$SSL_noise_level" \
         --alpha_01="$alpha_01" --alpha_02="$alpha_02" --alpha_03="$alpha_03" \

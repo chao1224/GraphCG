@@ -5,16 +5,16 @@ zinc250k_folder=./results_reported/zinc250k_512t2cnn_256gnn_512-64lin_10flow_19f
 
 
 time=11
-contrastive_SSL_list=(
-    contrastive_SSL_random
-    contrastive_SSL_variance_high
-    contrastive_SSL_DisCo
+GraphCG_editing_list=(
+    GraphCG_editing_random
+    GraphCG_editing_variance_high
+    GraphCG_editing_DisCo
 )
 num_direction_list=(10)
 num_sample_list=(100 500)
 
-for contrastive_SSL in "${contrastive_SSL_list[@]}"; do
-if [ "$contrastive_SSL" = "contrastive_SSL_DisCo" ]; then
+for GraphCG_editing in "${GraphCG_editing_list[@]}"; do
+if [ "$GraphCG_editing" = "GraphCG_editing_DisCo" ]; then
     embedding_function="MoFlowDisCo"
 else
     embedding_function="none"
@@ -28,7 +28,7 @@ for num_sample in "${num_sample_list[@]}"; do
     data_name=qm9
     model_folder="$qm9_folder"
 
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$num_sample"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$num_sample"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -43,7 +43,7 @@ for num_sample in "${num_sample_list[@]}"; do
         --data_name "$data_name"  \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --output_folder="$output_folder"
     fi
 
@@ -55,8 +55,8 @@ for num_sample in "${num_sample_list[@]}"; do
     data_name=zinc250k
     model_folder="$zinc250k_folder"
     
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"/"$num_direction"_"$num_sample"
-    output_folder=results_manipulation/"$data_name"/"$contrastive_SSL"/"$num_direction"_"$num_sample"_"$epochs"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"/"$num_direction"_"$num_sample"
+    output_folder=results_manipulation/"$data_name"/"$GraphCG_editing"/"$num_direction"_"$num_sample"_"$epochs"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -71,7 +71,7 @@ for num_sample in "${num_sample_list[@]}"; do
         --data_name "$data_name"  \
         --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --alpha_step_option=first_last \
         --output_folder="$output_folder"
     fi

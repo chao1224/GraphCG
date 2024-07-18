@@ -4,14 +4,14 @@ zinc250k_folder=./results_reported/zinc250k_512t2cnn_256gnn_512-64lin_10flow_19f
 
 
 time=2
-contrastive_SSL_list=(contrastive_SSL_PCA)
+GraphCG_editing_list=(GraphCG_editing_PCA)
 embedding_function_list=(PCA_Embedding)
 num_direction_list=(10)
 
 num_sample_list=(10)
 
 for embedding_function in "${embedding_function_list[@]}"; do
-for contrastive_SSL in "${contrastive_SSL_list[@]}"; do
+for GraphCG_editing in "${GraphCG_editing_list[@]}"; do
 for num_direction in "${num_direction_list[@]}"; do
 for num_sample in "${num_sample_list[@]}"; do
 
@@ -19,7 +19,7 @@ for num_sample in "${num_sample_list[@]}"; do
     data_name=qm9
     model_folder="$qm9_folder"
 
-    output_folder=to_delete/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$num_sample"
+    output_folder=to_delete/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$num_sample"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -33,7 +33,7 @@ for num_sample in "${num_sample_list[@]}"; do
         --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
         --verbose 1 \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --output_folder="$output_folder" > "$output_file"
     fi
 
@@ -42,7 +42,7 @@ for num_sample in "${num_sample_list[@]}"; do
     data_name=zinc250k
     model_folder="$zinc250k_folder"
     
-    output_folder=to_delete/"$data_name"/"$contrastive_SSL"_"$embedding_function"/"$num_direction"_"$num_sample"
+    output_folder=to_delete/"$data_name"/"$GraphCG_editing"_"$embedding_function"/"$num_direction"_"$num_sample"
     mkdir -p "$output_folder"
     output_file="$output_folder"/output.txt
 
@@ -56,7 +56,7 @@ for num_sample in "${num_sample_list[@]}"; do
         --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
         --num_direction "$num_direction" \
         --verbose 1 \
-        --embedding_function="$embedding_function" --contrastive_SSL="$contrastive_SSL" \
+        --embedding_function="$embedding_function" --GraphCG_editing="$GraphCG_editing" \
         --output_folder="$output_folder" > "$output_file"
     fi
 
