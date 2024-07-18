@@ -14,7 +14,9 @@ This repository provides the source code for the paper **GraphCG: Unsupervised D
 <br>
 [[NeurIPS Graph Learning Frontiers Workshop 2022](https://glfrontiers.github.io/)]
 
-# 1 Environment
+# 1.1 Molecular Graph
+
+### 1.1 Environment
 
 ```
 conda create --name GraphCG python=3.7 pandas matplotlib
@@ -38,11 +40,7 @@ pip install gdown
 pip install .
 ```
 
-# 2 Tasks
-
-## 2.1 Molecular Graph
-
-### 2.1.1 MoFlow
+### 1.1 MoFlow
 
 1. Go to directory, `cd MoFlow`.
 2. Download datasets and pretrained models,
@@ -58,7 +56,7 @@ chembl_folder=./results_reported/chembl
 ```
 4. Then run the jobs `bash run_GraphCG.sh`.
 
-## 2.1.2 HierVAE
+## 1.2 HierVAE
 
 1. Go to directory, `cd HierVAE`.
 2. Download datasets and pretrained models,
@@ -73,7 +71,31 @@ model=results_reported/qm9/model.ckpt
 ```
 4. Then run the jobs `bash run_GraphCG.sh`. Notice that please make sure the GPU is enabled.
 
-## 2.3 PointFlow
+
+## 2 Mesh Point
+
+## 2.1 Environment
+```
+conda create -n GraphCG python=3.6
+conda activate GraphCG
+
+conda install pytorch=1.9.1 torchvision -c pytorch -y
+conda install numpy matplotlib pillow scipy tqdm scikit-learn -y
+conda install tensorflow-gpu==1.13.1 -y
+pip install tensorboardX==1.7
+pip install pandas
+pip install torchdiffeq==0.0.1
+pip install cython
+conda install -c sirokujira python-pcl --channel conda-forge
+
+pip install -e .
+```
+
+## 2.2 PointFlow
+
+1. Go to directory, `cd PointFlow`.
+2. Download datasets
+
 
 
 ## Cite Us
