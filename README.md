@@ -40,7 +40,7 @@ pip install gdown
 pip install .
 ```
 
-### 1.1 MoFlow
+### 1.2 MoFlow
 
 1. Go to directory, `cd MoFlow`.
 2. Download datasets and pretrained models,
@@ -54,9 +54,10 @@ qm9_folder=./results_reported/qm9_64gnn_128-64lin_1-1mask_0d6noise_convlu1
 zinc250k_folder=./results_reported/zinc250k_512t2cnn_256gnn_512-64lin_10flow_19fold_convlu2_38af-1-1mask
 chembl_folder=./results_reported/chembl
 ```
-4. Then run the jobs `bash test_GraphCG.sh`.
+4. Run testing scripts using `bash test_GraphCG.sh`.
+5. Submit SLURM jobs using `sbatch submit_*.sh`.
 
-## 1.2 HierVAE
+## 1.3 HierVAE
 
 1. Go to directory, `cd HierVAE`.
 2. Download datasets and pretrained models,
@@ -69,7 +70,8 @@ unzip HierVAE.zip
 data_name=qm9
 model=results_reported/qm9/model.ckpt
 ```
-4. Then run the jobs `bash test_GraphCG.sh`. Notice that please make sure the GPU is enabled.
+4. Run testing scripts using `bash test_GraphCG.sh`. Notice that please make sure the GPU is enabled.
+5. Submit SLURM jobs using `sbatch submit_*.sh`.
 
 
 ## 2 Mesh Point
@@ -105,8 +107,8 @@ unzip pretrained_models.zip
 ```
 data_dir=ShapeNetCore.v2.PC15k
 ```
-4. Then run the jobs `bash test_GraphCG.sh`.
-
+4. Run testing scripts using `bash test_GraphCG.sh`.
+5. Submit SLURM jobs using `sbatch submit_*.sh`.
 
 
 ## Cite Us
