@@ -1,27 +1,27 @@
 import argparse
-import os
-import sys
-import random
 import copy
+import os
+import random
+import sys
 import time
-from tqdm import tqdm
-import pandas as pd
-import numpy as np
 
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 sys.path.insert(0, "./PointFlow")
 from datasets import get_datasets
+from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
+                     Direction_Embedding_03, Direction_Embedding_04,
+                     contrastive_SSL_01, contrastive_SSL_02,
+                     contrastive_SSL_03, contrastive_SSL_04)
 from models.networks import PointFlow
 
-
-from GraphCG import Direction_Embedding_01, Direction_Embedding_02, Direction_Embedding_03, Direction_Embedding_04
-from GraphCG import contrastive_SSL_01, contrastive_SSL_02, contrastive_SSL_03, contrastive_SSL_04
 from visualization_point_cloud import plot_matrix3d_three_views_plt
-
 
 NONLINEARITIES = ["tanh", "relu", "softplus", "elu", "swish", "square", "identity"]
 SOLVERS = ["dopri5", "bdf", "rk4", "midpoint", 'adams', 'explicit_adams', 'fixed_adams']
