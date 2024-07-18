@@ -4,6 +4,10 @@
 
 Authors: Shengchao Liu, Chengpeng Wang, Jiarui Lu, Weili Nie, Hanchen Wang, Zuoxinran Li, Bolei Zhou, Jian Tang
 
+<p align="center">
+  <img src="figures/pipeline.png" /> 
+</p>
+
 This repository provides the source code for the paper **GraphCG: Unsupervised Discovery of Steerable Factors When Graph Deep Generative Models Are Entangled**, which aims at:
 - exploring the steerable factors in graphs
 - implementing the graph controllable generation in an unsupervised manner
@@ -15,6 +19,10 @@ This repository provides the source code for the paper **GraphCG: Unsupervised D
 [[NeurIPS Graph Learning Frontiers Workshop 2022](https://glfrontiers.github.io/)]
 
 # 1.1 Molecular Graph
+
+<p align="center">
+  <img src="figures/Molecule.png" /> 
+</p>
 
 ### 1.1 Environment
 
@@ -74,7 +82,11 @@ model=results_reported/qm9/model.ckpt
 5. Submit SLURM jobs using `bash submit_*.sh`.
 
 
-## 2 Mesh Point
+## 2 Point Clouds
+
+<p align="center">
+  <img src="figures/PointCloud.png" /> 
+</p>
 
 ## 2.1 Environment
 ```
