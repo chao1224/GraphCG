@@ -4,7 +4,7 @@ num_sample=100
 
 
 cates=airplane
-contrastive_SSL=contrastive_SSL_01
+GraphCG_editing=GraphCG_editing_01
 embedding_function=Direction_Embedding_01
 num_direction=3
 SSL_noise_level=0.1
@@ -26,7 +26,7 @@ python step_02_GraphCG.py \
 --resume_checkpoint pretrained_models/gen/"$cates"/checkpoint.pt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
---contrastive_SSL="$contrastive_SSL" --embedding_function="$embedding_function" \
+--GraphCG_editing="$GraphCG_editing" --embedding_function="$embedding_function" \
 --alpha_step_option="$alpha_step_option" --alpha_step_option_random_num="$alpha_step_option_random_num" \
 --SSL_noise_level="$SSL_noise_level" \
 --alpha_01="$alpha_01" --alpha_02="$alpha_02" --alpha_03="$alpha_03" \

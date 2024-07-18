@@ -22,7 +22,7 @@ class LatentDataset(Dataset):
         return self.latent_codes[idx]
 
 
-def contrastive_SSL_01_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_01_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
     print("alpha_list", alpha_list)
@@ -101,7 +101,7 @@ def contrastive_SSL_01_with_batch(args, whole_latent, embedding_function, direct
     return embedding_function
 
 
-def contrastive_SSL_02_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_02_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
     print("alpha_list", alpha_list)
@@ -177,7 +177,7 @@ def contrastive_SSL_02_with_batch(args, whole_latent, embedding_function, direct
     return embedding_function
 
 
-def contrastive_SSL_03_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_03_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
 
@@ -248,7 +248,7 @@ def contrastive_SSL_03_with_batch(args, whole_latent, embedding_function, direct
     return embedding_function
 
 
-def contrastive_SSL_04_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_04_with_batch(args, whole_latent, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
 

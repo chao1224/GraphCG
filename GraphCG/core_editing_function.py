@@ -147,7 +147,7 @@ class Direction_Embedding_04(torch.nn.Module):
         return h, direction
 
 
-def contrastive_SSL_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
     print("alpha_list", alpha_list)
@@ -219,7 +219,7 @@ def contrastive_SSL_01(args, codes, embedding_function, direction_basis_list, cr
     return embedding_function
 
 
-def contrastive_SSL_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
     print("alpha_list", alpha_list)
@@ -289,7 +289,7 @@ def contrastive_SSL_02(args, codes, embedding_function, direction_basis_list, cr
     return embedding_function
 
 
-def contrastive_SSL_03(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_03(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
 
@@ -354,7 +354,7 @@ def contrastive_SSL_03(args, codes, embedding_function, direction_basis_list, cr
     return embedding_function
 
 
-def contrastive_SSL_04(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
+def GraphCG_editing_04(args, codes, embedding_function, direction_basis_list, criterion, optimizer):
     alpha_list = np.linspace(-args.alpha, args.alpha, args.alpha_split_num)
     alpha_list = alpha_list.tolist()
 

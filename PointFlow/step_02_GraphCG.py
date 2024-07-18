@@ -17,7 +17,7 @@ sys.path.insert(0, "./PointFlow")
 from datasets import get_datasets
 from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
                      Direction_Embedding_03, Direction_Embedding_04,
-                     GraphCG_option_01, GraphCG_option_02)
+                     GraphCG_editing_01, GraphCG_editing_02)
 from models.networks import PointFlow
 
 from visualization_point_cloud import plot_matrix3d_three_views_plt
@@ -170,10 +170,10 @@ def step_02_SSL_training_and_saving():
     ]
     optimizer = optim.Adam(model_param_group, lr=args.lr, weight_decay=args.decay)
     
-    if args.GraphCG_option == "GraphCG_option_01":
-        embedding_function = GraphCG_option_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
-    elif args.GraphCG_option == "GraphCG_option_02":
-        embedding_function = GraphCG_option_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
+    if args.GraphCG_editing == "GraphCG_editing_01":
+        embedding_function = GraphCG_editing_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
+    elif args.GraphCG_editing == "GraphCG_editing_02":
+        embedding_function = GraphCG_editing_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     else:
         raise ValueError(
             "Contrastive SSL function {} not included.".format(args.embedding_function)
@@ -331,7 +331,7 @@ if __name__ == "__main__":
     parser.add_argument("--decay", type=float, default=0)
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--embedding_function", type=str, default="Direction_Embedding_01")
-    parser.add_argument("--GraphCG_option", type=str, default="GraphCG_option_01")
+    parser.add_argument("--GraphCG_editing", type=str, default="GraphCG_editing_01")
     parser.add_argument("--num_directions", type=int, default=20)
     parser.add_argument("--alpha", type=float, default=3.0)
     parser.add_argument("--alpha_split_num", type=int, default=11)
