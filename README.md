@@ -99,6 +99,7 @@ pip install -e .
 ```
 python step_01_download.py
 unzip ShapeNetCore.v2.PC15k.zip
+unzip pretrained_models.zip
 ```
 3. Set up data path,
 ```

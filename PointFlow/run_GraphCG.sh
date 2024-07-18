@@ -23,7 +23,7 @@ python step_02_GraphCG.py \
 --dims 512-512-512 \
 --latent_dims 256-256 \
 --use_latent_flow \
---resume_checkpoint PointFlow/pretrained_models/gen/"$cates"/checkpoint.pt \
+--resume_checkpoint pretrained_models/gen/"$cates"/checkpoint.pt \
 --epochs "$epochs" --num_manipulation "$num_manipulation" --num_sample "$num_sample" \
 --num_direction "$num_direction" \
 --contrastive_SSL="$contrastive_SSL" --embedding_function="$embedding_function" \
