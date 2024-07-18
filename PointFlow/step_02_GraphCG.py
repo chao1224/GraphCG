@@ -83,8 +83,6 @@ def generate_from_reconstruction(model, args):
         test_pc = test_pc.to(device)
         train_pc = train_pc.to(device)
         B, N = test_pc.size(0), test_pc.size(1)
-        # TODO: need to double-check
-        # latent_z, out_pc = model.reconstruct(train_pc, num_points=N, return_latent=True)
         latent_z, out_pc = model.reconstruct(test_pc, num_points=N, return_latent=True)
         mean, std = data['mean'].float(), data['std'].float()
         mean = mean.to(device)
@@ -125,61 +123,6 @@ def step_01_generate_samples():
         mean=mean,
         std=std,
     )
-    return
-
-
-def step_02_Onehot_SSL_saving():
-    data = np.load(manipulation_generated_latent_path+".npz")
-    latent_z = data['latent_z']
-    sample_pcs = data['sample_pcs']
-    ref_pcs = data['ref_pcs']
-    mean = data['mean']
-    std = data['std']
-
-    N = latent_z.shape[0]
-    print("sample {} from {}".format(args.num_sample, N))
-    if args.num_sample < N:
-        sampled_N = random.sample(range(N), args.num_sample)
-        sampled_N = np.array(sampled_N)
-        print("sampled_N", sampled_N)
-    else:
-        sampled_N = np.arange(N)
-    training_z = latent_z[sampled_N]
-    np.savez_compressed(manipulation_sampled_index_path, sampled_N=sampled_N)
-
-    z_space_dim = training_z.shape[1]
-    direction_basis_list = torch.eye(z_space_dim)
-    mean = torch.from_numpy(mean).to(device)
-    std = torch.from_numpy(std).to(device)
-
-    #################### sample direction ####################
-    print("\ndirection basis list: {}\n{}".format(direction_basis_list.size(), direction_basis_list))
-    direction_list = []
-    sampled_direction_idx = random.sample(list(np.arange(z_space_dim)), args.num_directions)
-    print("sampled_direction_idx: ", sampled_direction_idx)
-    for i in sampled_direction_idx:
-        direction = direction_basis_list[i]
-        direction_list.append(direction.cpu().detach().numpy())
-    direction_list = np.array(direction_list)
-    direction_list = torch.from_numpy(direction_list).to(device).float()
-
-    #################### save manipulated point clouds ####################
-    w = model.sample_gaussian((args.num_manipulation, z_space_dim))
-    z = model.latent_cnf(w, None, reverse=True).view(*w.size())
-
-    step_03_save_and_draw_manipulation(
-        model=model,
-        embedding_function=None,
-        direction_list=direction_list,
-        direction_basis_list=None,
-        z=z, mean=mean, std=std, device=device, args=args)
-
-    selected_idx = sampled_N[:5]
-    visualization_output_dir = os.path.join(manipulation_folder, "visualization")
-    visualization_output_file = os.path.join(visualization_output_dir, "sample")
-    plot_matrix3d_three_views_plt(visualization_output_file, sample_pcs[selected_idx], selected_idx)
-    visualization_output_file = os.path.join(visualization_output_dir, "ref")
-    plot_matrix3d_three_views_plt(visualization_output_file, ref_pcs[selected_idx], selected_idx)
     return
 
 
@@ -302,11 +245,6 @@ def step_03_save_and_draw_manipulation(
                 if embedding_function is not None:
                     z_neo_manipulated = embedding_function.get_latent(z[data_idx:data_idx+1], direction_basis_list[direction_idx], alpha_list[step_idx])
                     z_neo_manipulated = z_neo_manipulated.squeeze()
-                    # if alpha_list[step_idx] == 0:
-                    #     z_neo_manipulated = z[data_idx]
-                    # else:
-                    #     z_neo_manipulated = embedding_function.get_latent(z[data_idx:data_idx+1], direction_basis_list[direction_idx], alpha_list[step_idx])
-                    #     z_neo_manipulated = z_neo_manipulated.squeeze()
                     z_manipulated_list.append(z_neo_manipulated)
                 else:
                     z_neo_manipulated = z[data_idx] + direction_list[direction_idx] * alpha_list[step_idx]
@@ -453,9 +391,6 @@ if __name__ == "__main__":
     step_01_generate_samples()
 
     ########## step 02 and step 03 ##########
-    if args.contrastive_SSL == "contrastive_SSL_onehot":
-        step_02_Onehot_SSL_saving()
-    else:
-        step_02_SSL_training_and_saving()
+    step_02_SSL_training_and_saving()
 
     
