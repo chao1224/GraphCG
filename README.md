@@ -55,7 +55,7 @@ zinc250k_folder=./results_reported/zinc250k_512t2cnn_256gnn_512-64lin_10flow_19f
 chembl_folder=./results_reported/chembl
 ```
 4. Run testing scripts using `bash test_GraphCG.sh`.
-5. Submit SLURM jobs using `sbatch submit_*.sh`.
+5. Submit SLURM jobs using `bash submit_*.sh`.
 
 ## 1.3 HierVAE
 
@@ -71,7 +71,7 @@ data_name=qm9
 model=results_reported/qm9/model.ckpt
 ```
 4. Run testing scripts using `bash test_GraphCG.sh`. Notice that please make sure the GPU is enabled.
-5. Submit SLURM jobs using `sbatch submit_*.sh`.
+5. Submit SLURM jobs using `bash submit_*.sh`.
 
 
 ## 2 Mesh Point
@@ -108,7 +108,7 @@ unzip pretrained_models.zip
 data_dir=ShapeNetCore.v2.PC15k
 ```
 4. Run testing scripts using `bash test_GraphCG.sh`.
-5. Submit SLURM jobs using `sbatch submit_*.sh`.
+5. Submit SLURM jobs using `bash submit_*.sh`.
 
 
 ## Cite Us
