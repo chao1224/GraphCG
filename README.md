@@ -119,7 +119,7 @@ unzip pretrained_models.zip
 ```
 data_dir=ShapeNetCore.v2.PC15k
 ```
-4. Run testing scripts using `bash test_GraphCG.sh`.
+4. Run testing scripts using `bash test_GraphCG.sh`. Notice that please make sure the GPU is enabled.
 5. Submit SLURM jobs using `bash submit_*.sh`.
 
 
