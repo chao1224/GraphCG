@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>PointFlow</title>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111714927-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-111714927-1');
+        </script>
+    </head>
+    <body class="container" style="max-width:780px">
+
+        <!-- Title -->
+        <div>
+            <div class='row mt-5 mb-3'>
+                <div class='col text-center'>
+                    <p class="h2 font-weight-normal">PointFlow: 3D Point Cloud Generation with Continuous Normalizing Flows</p>
+                </div>
+            </div>
+
+            <!-- authors -->
+            <div class='row text-center h5 font-weight-bold pl-4 pr-4 mb-4'>
+                <a class="col-md-3 col-xs-6" href="http://www.guandaoyang.com"><span>Guandao Yang*</span></a>
+                <a class="col-md-3 col-xs-6" href="http://www.cs.cornell.edu/~xhuang/"><span>Xun Huang*</span></a>
+                <a class="col-md-3 col-xs-6" href="http://www.cs.cornell.edu/~zekun/"><span>Zekun Hao</span></a>
+                <a class="col-md-3 col-xs-6" href="http://mingyuliu.net/"><span>Ming-Yu Liu</span></a>
+                <a class="col-md-6 col-xs-6" href="http://blogs.cornell.edu/techfaculty/serge-belongie/"><span>Serge Belongie</span></a>
+                <a class="col-md-6 col-xs-6" href="http://home.bharathh.info/"><span>Bharath Hariharan</span></a>
+            </div>
+
+
+            <!-- affiliations -->
+            <div class='row mt-1 mt-2' >
+                <div class='col text-center'>
+                    <p class="h5 font-weight-light">
+                    <a class="ml-4" href="https://www.cornell.edu/"><span>Cornell University</span></a>
+                    <a class="mr-4 ml-4" href="https://tech.cornell.edu/"><span>Cornell Tech</span></a>
+                    <a class="mr-4 ml-4" href="https://www.nvidia.com/"><span>NVIDIA</span></a>
+                    </p>
+                </div>
+            </div>
+
+            <div class='row text-center h5 font-weight-light pl-4 pr-4 mb-4'>
+                <span class="col-md-12 col-xs-12" style="color:#007bff">*Equal contribution</span>
+            </div>
+
+			<div class='row justify-content-center'  style="position: relative; width: 100%;height: 0;padding-bottom: 33%; margin:0">
+                <img 
+                    class="img-fluid rounded mx-auto d-block" 
+                    src="assets/teaser_sm.gif" alt="airplane" 
+                    style="position:absolute; width:100%; height:100%; top:0px; left:0px;" 
+                    srcset="assets/teaser.gif 1536w"
+                    sizes="(min-width: 768px) 1536px, 100vw"
+                >
+			</div>
+        </div>
+
+        <!-- Paper section -->
+        <div>
+            <hr>
+            <div class='row'>
+                <div class='col-md-3 col-sm-3 col-xs-12 text-center col-sm-3'>
+                    <div class="row mt-4">
+                        <a href="https://arxiv.org/pdf/1906.12320.pdf" style="max-width:200px; margin-left:auto; margin-right:auto">
+                            <img src="assets/paper.jpg" alt="paper-snapshot" class="img-thumbnail" width="80%" style="box-shadow: 10px 10px 5px grey;">
+                        </a>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <a class="h5" href="https://arxiv.org/abs/1906.12320" style="margin-right:10px">
+                                <span>[Arxiv]</span>
+                            </a>
+                            <a class="h5" href="https://github.com/stevenygd/PointFlow" style="margin-right:10px">
+                                <span>[Code]</span>
+                            </a>
+                            <a class="h5" href="assets/Bibtex.txt" target="_blank">
+                                <span>[Bibtex]</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-9 col-sm-9 col-xs-12'>
+                    <p class='h4 font-weight-bold '>Abstract</p>
+                    <p style='line-height:1;'> 
+                    As 3D point clouds become the representation of choice
+                    for multiple vision and graphics applications, the ability to
+                    synthesize or reconstruct high-resolution, high-fidelity point
+                    clouds becomes crucial. Despite the recent success of deep
+                    learning models in discriminative tasks of point clouds,
+                    generating point clouds remains challenging. This paper
+                    proposes a principled probabilistic framework to generate
+                    3D point clouds by modeling them as a distribution of
+                    distributions. Specifically, we learn a two-level hierarchy
+                    of distributions where the first level is the distribution of
+                    shapes and the second level is the distribution of points
+                    given a shape. This formulation allows us to both sample
+                    shapes and sample an arbitrary number of points from
+                    a shape. Our generative model, named PointFlow, learns
+                    each level of the distribution with a continuous normalizing
+                    flow. The invertibility of normalizing flows enables
+                    computation of the likelihood during training and allows us
+                    to train our model in the variational inference framework.
+                    Empirically, we demonstrate that PointFlow achieves stateof-
+                    the-art performance in point cloud generation. We additionally
+                    show that our model can faithfully reconstruct
+                    point clouds and learn useful representations in an unsupervised
+                    manner.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video -->
+        <div>
+            <hr>
+
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2 mr-3'>Video</p>
+                </div>
+            </div>
+
+
+            <div class='row mt-3 text-center center-block' style=" margin-left:auto; margin-right:auto; max-width:560px">
+                <div class='col ml-1 mr-1' style="position: relative; width: 100%;height: 0;padding-bottom: 56%;">
+                    <iframe 
+                        src="https://www.youtube.com/embed/jqBiv77xC0M" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                        style="position: absolute;width: 100%;height: 100%; left: 0; top: 0;"
+                    >
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Architecture, explaination -->
+        <div>
+            <hr>
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2'>Brief Introduction to the Method</p>
+                </div>
+            </div>
+
+            <div class='row mt-3'>
+                <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/pcl_is_a_sample.gif" class="img-fluid" alt="architecture">
+                </div>
+                <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-5'>
+                    <p class="text-break">
+                        Each shape can be viewed as a distribution of 3D points.
+                        In such distribution, points on the shape have higher probability and are more likely to be sampled.
+                        A point cloud can be viewed as a set of points sampled from such distribution.
+                    </p>
+                </div>
+            </div>
+
+            <div class='row mt-3'>
+                <div class='col-md-5 col-sm-5 col-xs-12 align-middle mt-5'>
+                    <p class="text-break">
+                    We use two continuous normalizing flows (CNFs) to model the distribution of shapes, while each shape is a distribution of 3D points.
+                    The latent CNF transforms a vector sampled from the shape prior to a latent shape vector.
+                    The point CNF transforms 3D points sampled from the point prior to a point cloud conditioned on a shape vector.
+                    </p>
+                </div>
+                <div class='col-md-7 col-sm-7 col-xs-12 mt-3'>
+                    <img src="assets/inference-architecture.gif" class="img-fluid" alt="architecture">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Results, transformation -->
+        <div>
+            <hr>
+            <div class='row text-center'>
+                <div class='col'>
+                    <p class='h2'>Visulaization of the Flow</p>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col'>
+                    <img src="assets/flows.gif" class="img-fluid rounded mx-auto d-block" alt="flow-airplane-4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Ack -->
+        <div>
+            <hr>
+
+            <div class='row mb-5 text-center'>
+                <div class='col'>
+                    <p class='h2'>Acknowledgements</p>
+                    <p>This work was supported in part by a research gift from Magic Leap. Xun Huang was supported by NVIDIA fellowship.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
