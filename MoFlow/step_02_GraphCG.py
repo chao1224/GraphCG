@@ -21,8 +21,7 @@ import torch.optim as optim
 from GraphCG import (Direction_Embedding_01, Direction_Embedding_02,
                      Direction_Embedding_03, Direction_Embedding_04,
                      GraphCG_editing_01, GraphCG_editing_01_with_batch,
-                     GraphCG_editing_02, GraphCG_editing_03,
-                     GraphCG_editing_04)
+                     GraphCG_editing_02)
 from GraphCG.molecule_utils import step_03_evaluate_manipuated_data
 
 from data import transform_chembl, transform_qm9, transform_zinc250k
@@ -352,10 +351,6 @@ def step_02_SSL_training_and_saving():
         embedding_function = GraphCG_editing_01(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     elif args.GraphCG_editing == "GraphCG_editing_02":
         embedding_function = GraphCG_editing_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
-    elif args.GraphCG_editing == "GraphCG_editing_03":
-        embedding_function = GraphCG_editing_03(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
-    elif args.GraphCG_editing == "GraphCG_editing_04":
-        embedding_function = GraphCG_editing_04(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     elif args.GraphCG_editing == "GraphCG_editing_DisCo":
         embedding_function = GraphCG_editing_01_with_batch(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     else:

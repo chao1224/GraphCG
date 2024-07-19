@@ -1,11 +1,4 @@
 
-epochs=100
-num_manipulation=200
-num_sample=500
-num_direction=10
-
-
-
 epochs=5
 num_manipulation=3
 num_sample=5
