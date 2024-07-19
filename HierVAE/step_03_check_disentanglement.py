@@ -144,8 +144,6 @@ def check_disentanglement():
         print("label: {}\tfragment: {}\tcount: {}".format(label_idx, RDKIT_fragments[label_idx], label_pos_count[label_idx]))
     print('\n\n\n')
 
-    selected_index = [1, 2, 5, 6, 15, 16, 17, 23, 27, 41, 57, 78]
-    selected_index = [1, 2, 7, 10, 11, 15, 16, 27, 41, 44, 83]
     selected_index = [1, 2, 10, 11, 15, 16, 41]
     label_list = labels_list[:, selected_index]
     print("after selection: {}\t{}".format(label_list.shape, np.sum(label_list, axis=0)))
@@ -220,9 +218,6 @@ if __name__ == '__main__':
     vocab = [x.strip("\r\n ").split() for x in open(args.vocab)] 
     args.vocab = PairVocab(vocab)
 
-    # with open('./hgraph2graph/data/{}/all.txt'.format(args.dataset)) as f:
-        # train_smiles = [line.strip("\r\n ") for line in f] 
-    # train_smiles = [line.strip("\r\n ") for line in open('./hgraph2graph/data/{}/all.txt'.format(args.dataset))]
     train_smiles = [line.strip("\r\n ") for line in open(args.train)]
 
     model = HierVAE(args).cuda()
