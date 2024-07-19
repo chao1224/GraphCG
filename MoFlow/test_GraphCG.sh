@@ -101,4 +101,4 @@ python step_02_GraphCG.py \
 --batch-size 256 --data_name zinc250k --epochs 20 --num_manipulation 100 \
 --num_sample 500 --num_direction 32 --embedding_function=Direction_Embedding_03 \
 --GraphCG_editing=GraphCG_editing_01 --alpha_step_option=first_last \
---alpha_step_option_random_num=64 --SSL_noise_level=0.1 --alpha_01=2 --alpha_02=1 --alpha_03=0
+--alpha_step_option_random_num=64 --noise_level=0.1 --alpha_01=2 --alpha_02=1 --alpha_03=0

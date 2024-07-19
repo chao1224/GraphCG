@@ -199,7 +199,7 @@ def save_manipulation(
         return
 
 
-def step_02_Random_SSL_saving():
+def step_02_Random_saving():
     training_z = np.load(manipulation_generated_latent_path)
 
     z_space_dim = training_z.shape[1]    
@@ -232,7 +232,7 @@ def step_02_Random_SSL_saving():
     return
 
 
-def step_02_Variance_SSL_saving():
+def step_02_Variance_saving():
     training_z = np.load(manipulation_generated_latent_path)
     print("training_z", training_z.shape)
 
@@ -282,7 +282,7 @@ def step_02_Variance_SSL_saving():
     return
 
 
-def step_02_PCA_SSL_saving():
+def step_02_PCA_saving():
     training_z = np.load(manipulation_generated_latent_path)
     print("training_z", training_z.shape)
 
@@ -319,7 +319,7 @@ def step_02_PCA_SSL_saving():
     return
 
 
-def step_02_SSL_training_and_saving():
+def step_02_GraphCG_training_and_saving():
     training_z = np.load(manipulation_generated_latent_path)
     codes = training_z
     codes = torch.from_numpy(training_z).to(device)
@@ -355,7 +355,7 @@ def step_02_SSL_training_and_saving():
         embedding_function = GraphCG_editing_01_with_batch(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     else:
         raise ValueError(
-            "Contrastive SSL function {} not included.".format(args.embedding_function)
+            "Editing function {} not included.".format(args.GraphCG_editing)
         )
 
     #################### save direction ####################
@@ -460,11 +460,11 @@ if __name__ == "__main__":
     parser.add_argument("--num_directions", type=int, default=100)
     parser.add_argument("--alpha", type=float, default=3.0)
     parser.add_argument("--alpha_split_num", type=int, default=21)
-    parser.add_argument("--SSL_noise_level", type=float, default=1)
+    parser.add_argument("--noise_level", type=float, default=1)
     parser.add_argument("--num_manipulation", type=int, default=3, help="number of manipulated data")
-    parser.add_argument("--normalize_codes", type=int, default=1, help="useful to get a converged SSL loss")
-    parser.add_argument("--alpha_01", type=float, default=1, help="coeff for latent SSL")
-    parser.add_argument("--alpha_02", type=float, default=1, help="coeff for direction SSL")
+    parser.add_argument("--normalize_codes", type=int, default=1, help="useful to get a converged loss")
+    parser.add_argument("--alpha_01", type=float, default=1, help="coeff for latent")
+    parser.add_argument("--alpha_02", type=float, default=1, help="coeff for direction")
     parser.add_argument("--alpha_03", type=float, default=0, help="coeff for sparsity")
     parser.add_argument("--alpha_step_option", type=str, default="random", choices=["random", "first_last"])
     parser.add_argument("--alpha_step_option_random_num", type=int, default=20)
@@ -546,16 +546,16 @@ if __name__ == "__main__":
 
     ########## step 02 ##########
     if args.GraphCG_editing == "GraphCG_editing_random":
-        step_02_Random_SSL_saving()
+        step_02_Random_saving()
     elif args.GraphCG_editing == "GraphCG_editing_variance_high":
-        step_02_Variance_SSL_saving()
+        step_02_Variance_saving()
     elif args.GraphCG_editing == "GraphCG_editing_PCA":
-        step_02_PCA_SSL_saving()
+        step_02_PCA_saving()
     elif args.GraphCG_editing == "GraphCG_editing_DisCo":
         assert args.embedding_function == "MoFlowDisCo"
-        step_02_SSL_training_and_saving()
+        step_02_GraphCG_training_and_saving()
     else:
-        step_02_SSL_training_and_saving()
+        step_02_GraphCG_training_and_saving()
 
     ########## step 03 ##########
     # props_list = ["tanimoto", "MolLogP", "TPSA", "MolWt", "qed", "sa", "drd2", "jnk3", "gsk3b"]

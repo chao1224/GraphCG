@@ -7,7 +7,7 @@ cates=airplane
 GraphCG_editing=GraphCG_editing_01
 embedding_function=Direction_Embedding_01
 num_direction=3
-SSL_noise_level=0.1
+noise_level=0.1
 
 alpha_step_option=random
 alpha_01=1
@@ -28,7 +28,7 @@ python step_02_GraphCG.py \
 --num_direction "$num_direction" \
 --GraphCG_editing="$GraphCG_editing" --embedding_function="$embedding_function" \
 --alpha_step_option="$alpha_step_option" --alpha_step_option_random_num="$alpha_step_option_random_num" \
---SSL_noise_level="$SSL_noise_level" \
+--noise_level="$noise_level" \
 --alpha_01="$alpha_01" --alpha_02="$alpha_02" --alpha_03="$alpha_03" \
 --output_folder="$output_folder" \
 --data_dir "ShapeNetCore.v2.PC15k"

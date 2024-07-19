@@ -125,7 +125,7 @@ def step_01_generate_samples():
     return
 
 
-def step_02_SSL_training_and_saving():
+def step_02_training_and_saving():
     data = np.load(manipulation_generated_latent_path+".npz")
     latent_z = data['latent_z']
     sample_pcs = data['sample_pcs']
@@ -176,7 +176,7 @@ def step_02_SSL_training_and_saving():
         embedding_function = GraphCG_editing_02(args, codes, embedding_function, direction_basis_list, criterion, optimizer)
     else:
         raise ValueError(
-            "Contrastive SSL function {} not included.".format(args.embedding_function)
+            "Graph Editing function {} not included.".format(args.GraphCG_editing)
         )
 
     #################### save direction ####################
@@ -336,11 +336,11 @@ if __name__ == "__main__":
     parser.add_argument("--alpha", type=float, default=3.0)
     parser.add_argument("--alpha_split_num", type=int, default=11)
     parser.add_argument("--alpha_split_num_for_visual", type=int, default=5)
-    parser.add_argument("--SSL_noise_level", type=float, default=1)
+    parser.add_argument("--noise_level", type=float, default=1)
     parser.add_argument("--num_manipulation", type=int, default=3, help="number of manipulated data")
-    parser.add_argument("--normalize_codes", type=int, default=1, help="useful to get a converged SSL loss")
-    parser.add_argument("--alpha_01", type=float, default=1, help="coeff for latent SSL")
-    parser.add_argument("--alpha_02", type=float, default=1, help="coeff for direction SSL")
+    parser.add_argument("--normalize_codes", type=int, default=1, help="useful to get a converged loss")
+    parser.add_argument("--alpha_01", type=float, default=1, help="coeff for latent")
+    parser.add_argument("--alpha_02", type=float, default=1, help="coeff for direction")
     parser.add_argument("--alpha_03", type=float, default=0, help="coeff for sparsity")
     parser.add_argument("--alpha_step_option", type=str, default="random", choices=["random", "first_last"])
     parser.add_argument("--alpha_step_option_random_num", type=int, default=20)
@@ -386,6 +386,6 @@ if __name__ == "__main__":
     step_01_generate_samples()
 
     ########## step 02 and step 03 ##########
-    step_02_SSL_training_and_saving()
+    step_02_training_and_saving()
 
     

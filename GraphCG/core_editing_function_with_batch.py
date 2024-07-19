@@ -51,7 +51,7 @@ def GraphCG_editing_01_with_batch(args, whole_latent, embedding_function, direct
                 #################### build up pos and negative pairs ####################
                 codes_01_list, codes_02_list, codes_03_list, codes_04_list = [], [], [], []
                 direction_list = []
-                codes_perturbed = codes + torch.randn_like(codes) * args.SSL_noise_level
+                codes_perturbed = codes + torch.randn_like(codes) * args.noise_level
                 for d in range(args.num_directions):
                     codes_01, direction_temp = embedding_function(codes, direction_basis_list[d], alpha_list[i])
                     codes_02, _ = embedding_function(codes_perturbed, direction_basis_list[d], alpha_list[i])
@@ -204,7 +204,7 @@ def GraphCG_editing_03_with_batch(args, whole_latent, embedding_function, direct
                 #################### build up pos and negative pairs ####################
                 codes_01_list, codes_02_list, codes_03_list = [], [], []
                 direction_list = []
-                codes_perturbed = codes + torch.randn_like(codes) * args.SSL_noise_level
+                codes_perturbed = codes + torch.randn_like(codes) * args.noise_level
                 for d in range(args.num_directions):
                     codes_01, direction_temp = embedding_function(codes, direction_basis_list[d], alpha_list[i])
                     codes_02, _ = embedding_function(codes_perturbed, direction_basis_list[d], alpha_list[i])
