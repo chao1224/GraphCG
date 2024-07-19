@@ -122,6 +122,11 @@ data_dir=ShapeNetCore.v2.PC15k
 4. Run testing scripts using `bash test_GraphCG.sh`. Notice that please make sure the GPU is enabled.
 5. Submit SLURM jobs using `bash submit_*.sh`.
 
+## 3 Optimal Hyperparameters and Results
+
+The optimal results and hyperparameters can be found at this [HuggingFace link](https://huggingface.co/datasets/chao1224/GraphCG).
+
+Please notice that in the archived scripts, we used hyperparameter `contrastive_SSL` (now changed to `GraphCG_editing`).
 
 ## Cite Us
 
@@ -135,6 +140,5 @@ Feel free to cite this work if you find it useful to you!
     issn={2835-8856},
     year={2024},
     url={https://openreview.net/forum?id=wyU3Q4gahM},
-    note={}
 }
 ```
