@@ -8,7 +8,8 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 
-from .core_editing_function import do_ssl_on_codes, do_ssl_on_directions
+from .core_editing_function import (do_editing_on_codes,
+                                    do_editing_on_directions)
 
 
 class LatentDataset(Dataset):
@@ -77,14 +78,14 @@ def GraphCG_editing_01_with_batch(args, whole_latent, embedding_function, direct
                 codes_04_list = torch.stack(codes_04_list, dim=0)  # num_directions, num_sample, emb_dim
                 direction_list = torch.stack(direction_list, dim=0)  # num_directions, embedding_dim
 
-                ssl_loss_on_codes_01 = do_ssl_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
-                ssl_loss_on_codes_02 = do_ssl_on_codes(codes_02_list, codes_01_list, codes_04_list, criterion, args)
+                editing_loss_on_codes_01 = do_editing_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
+                editing_loss_on_codes_02 = do_editing_on_codes(codes_02_list, codes_01_list, codes_04_list, criterion, args)
 
-                loss = 0.5 * args.alpha_01 * (ssl_loss_on_codes_01 + ssl_loss_on_codes_02)
+                loss = 0.5 * args.alpha_01 * (editing_loss_on_codes_01 + editing_loss_on_codes_02)
 
                 if args.alpha_02 > 0:
-                    ssl_loss_on_directions = do_ssl_on_directions(direction_list, criterion, args)
-                    loss += args.alpha_02 * ssl_loss_on_directions
+                    editing_loss_on_directions = do_editing_on_directions(direction_list, criterion, args)
+                    loss += args.alpha_02 * editing_loss_on_directions
                 if args.alpha_03 > 0:
                     sparsity_loss = torch.mean(torch.abs(direction_list))
                     loss += args.alpha_03 * sparsity_loss
@@ -153,14 +154,14 @@ def GraphCG_editing_02_with_batch(args, whole_latent, embedding_function, direct
                 codes_04_list = torch.stack(codes_04_list, dim=0)  # num_directions, num_sample, emb_dim
                 direction_list = torch.stack(direction_list, dim=0)  # num_directions, embedding_dim
 
-                ssl_loss_on_codes_01 = do_ssl_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
-                ssl_loss_on_codes_02 = do_ssl_on_codes(codes_02_list, codes_01_list, codes_04_list, criterion, args)
+                editing_loss_on_codes_01 = do_editing_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
+                editing_loss_on_codes_02 = do_editing_on_codes(codes_02_list, codes_01_list, codes_04_list, criterion, args)
 
-                loss = 0.5 * args.alpha_01 * (ssl_loss_on_codes_01 + ssl_loss_on_codes_02)
+                loss = 0.5 * args.alpha_01 * (editing_loss_on_codes_01 + editing_loss_on_codes_02)
 
                 if args.alpha_02 > 0:
-                    ssl_loss_on_directions = do_ssl_on_directions(direction_list, criterion, args)
-                    loss += args.alpha_02 * ssl_loss_on_directions
+                    editing_loss_on_directions = do_editing_on_directions(direction_list, criterion, args)
+                    loss += args.alpha_02 * editing_loss_on_directions
                 if args.alpha_03 > 0:
                     sparsity_loss = torch.mean(torch.abs(direction_list))
                     loss += args.alpha_03 * sparsity_loss
@@ -225,13 +226,13 @@ def GraphCG_editing_03_with_batch(args, whole_latent, embedding_function, direct
                 codes_03_list = torch.stack(codes_03_list, dim=0)  # num_directions, num_sample, emb_dim
                 direction_list = torch.stack(direction_list, dim=0)  # num_directions, embedding_dim
 
-                ssl_loss_on_codes_01 = do_ssl_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
+                editing_loss_on_codes_01 = do_editing_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
         
-                loss = args.alpha_01 * ssl_loss_on_codes_01
+                loss = args.alpha_01 * editing_loss_on_codes_01
 
                 if args.alpha_02 > 0:
-                    ssl_loss_on_directions = do_ssl_on_directions(direction_list, criterion, args)
-                    loss += args.alpha_02 * ssl_loss_on_directions
+                    editing_loss_on_directions = do_editing_on_directions(direction_list, criterion, args)
+                    loss += args.alpha_02 * editing_loss_on_directions
                 if args.alpha_03 > 0:
                     sparsity_loss = torch.mean(torch.abs(direction_list))
                     loss += args.alpha_03 * sparsity_loss
@@ -296,13 +297,13 @@ def GraphCG_editing_04_with_batch(args, whole_latent, embedding_function, direct
                 codes_03_list = torch.stack(codes_03_list, dim=0)  # num_directions, num_sample, emb_dim
                 direction_list = torch.stack(direction_list, dim=0)  # num_directions, embedding_dim
 
-                ssl_loss_on_codes_01 = do_ssl_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
+                editing_loss_on_codes_01 = do_editing_on_codes(codes_01_list, codes_02_list, codes_03_list, criterion, args)
 
-                loss = args.alpha_01 * ssl_loss_on_codes_01
+                loss = args.alpha_01 * editing_loss_on_codes_01
 
                 if args.alpha_02 > 0:
-                    ssl_loss_on_directions = do_ssl_on_directions(direction_list, criterion, args)
-                    loss += args.alpha_02 * ssl_loss_on_directions
+                    editing_loss_on_directions = do_editing_on_directions(direction_list, criterion, args)
+                    loss += args.alpha_02 * editing_loss_on_directions
                 if args.alpha_03 > 0:
                     sparsity_loss = torch.mean(torch.abs(direction_list))
                     loss += args.alpha_03 * sparsity_loss
